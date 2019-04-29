@@ -11,6 +11,9 @@
 </template>
 
 <script>
+// import setDay from "date-fns/set_day";
+import differenceInMilliseconds from "date-fns/difference_in_milliseconds";
+
 export default {
   name: "HelloGot",
   props: {
@@ -36,6 +39,18 @@ export default {
       ];
       return timerObject;
     }
+  },
+  methods: {
+    calculateGotTimer: function() {
+      const today = new Date();
+      const nextGotStarts = "2019-04-29T01:00:00.000Z";
+      this.secondsTillGotStarts =
+        -differenceInMilliseconds(today, nextGotStarts) / 1000;
+      setTimeout(this.calculateGotTimer, 1000);
+    }
+  },
+  created: function() {
+    this.calculateGotTimer();
   }
 };
 </script>
